@@ -541,8 +541,6 @@ app.get("/audit-logs", requireAdmin, async (req, res) => {
     });
   }
 });
-
-const PORT = process.env.PORT || 3000;
 app.get("/env-check", (req, res) => {
   res.json({
     hasDatabaseUrl: !!process.env.DATABASE_URL,
