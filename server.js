@@ -4,6 +4,7 @@ const cors = require("cors");
 const { Pool } = require("pg");
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -14,16 +15,10 @@ const pool = new Pool({
     rejectUnauthorized: false,
   },
 });
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
-  database: process.env.DB_NAME,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-});
 
 const ADMIN_USER = process.env.ADMIN_USER || "admin";
 const ADMIN_PASS = process.env.ADMIN_PASS || "admin123";
-const ADMIN_TOKEN = process.env.ADMIN_TOKEN || "wondacoin-secure-token";
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN || "wondacoin-secure-token";;
 
 async function writeAuditLog({
   adminUser,
