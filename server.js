@@ -543,7 +543,15 @@ app.get("/audit-logs", requireAdmin, async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-
+app.get("/env-check", (req, res) => {
+  res.json({
+    hasDatabaseUrl: !!process.env.DATABASE_URL,
+    startsWithPostgresql: (process.env.DATABASE_URL || "").startsWith("postgresql://"),
+    adminUserSet: !!process.env.ADMIN_USER,
+    adminPassSet: !!process.env.ADMIN_PASS,
+    adminTokenSet: !!process.env.ADMIN_TOKEN,
+  });
+});
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
